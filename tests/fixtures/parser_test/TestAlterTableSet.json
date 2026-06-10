@@ -1,0 +1,162 @@
+{
+  "source": "ParserTest.TestAlterTableSet",
+  "phase": 4,
+  "has_dynamic": true,
+  "cases": [
+    {
+      "sql": "ALTER TABLE Foo SET LOCATION '/a/b/c'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE TestDb.Foo SET LOCATION '/a/b/c'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo PARTITION (i=1,s='str') SET LOCATION '/a/i=1/s=str'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo PARTITION (s='str') SET LOCATION '/a/i=1/s=str'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo SET ROW FORMAT DELIMITED FIELDS TERMINATED BY ','",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo SET ROW FORMAT DELIMITED LINES TERMINATED BY '\n'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo SET COLUMN STATS col ('numDVs'='10')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo SET COLUMN STATS col ('numDVs'='10','maxSize'='20')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo SET COLUMN STATS col ('NUM_TRUES'='10')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo SET COLUMN STATS col ('NUM_FALSES'='20')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo SET COLUMN STATS col ('NUM_TRUES'='10','NUM_FALSES'='20')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE TestDb.Foo SET COLUMN STATS col ('avgSize'='20')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE TestDb.Foo SET FILEFORMAT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo PARTITION () SET LOCATION '/a'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo PARTITION () SET FILEFORMAT PARQUETFILE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo PARTITION (,) SET FILEFORMAT PARQUET",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo PARTITION (a=1) SET FILEFORMAT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo PARTITION (a=1) SET LOCATION",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE TestDb.Foo SET LOCATION abc",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE TestDb.Foo SET LOCATION",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE TestDb.Foo SET",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo SET ROW FORMAT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo SET ROW FORMAT DELIMITED FIELDS",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo PARTITION (i=1) SET ROW FORMAT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE SET COLUMN STATS col ('numDVs'='10'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo SET COLUMN STATS ('numDVs'='10'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo SET COLUMN STATS col",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo SET COLUMN STATS col ()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo SET COLUMN STATS col (numDVs='10')",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo SET COLUMN STATS col ('numDVs'=10)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo PARTITION (p=1) SET COLUMN STATS col ('avgSize'='20')",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

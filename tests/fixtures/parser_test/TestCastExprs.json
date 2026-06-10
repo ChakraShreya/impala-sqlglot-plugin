@@ -1,0 +1,57 @@
+{
+  "source": "ParserTest.TestCastExprs",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select cast(a + 5.0 as string) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select cast(NULL as string) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select cast('05-01-2017' as timestamp format 'MM-dd-yyyy')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select cast('2017.01.02' as date format 'YYYY-MM-DD')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select cast(a + 5.0 as badtype) from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select cast(a + 5.0, string) from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select cast('05-01-2017' as timestamp format 12345)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select cast('05-01-2017' as timestamp format )",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select cast('05-01-2017' as timestamp format NULL)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select cast('05-01-2017' as date format NULL)",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "source": "ParserTest.TestShowGrantPrincipal",
+  "phase": 5,
+  "has_dynamic": true,
+  "cases": [
+    {
+      "sql": "SHOW GRANT FOO bar",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

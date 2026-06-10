@@ -1,0 +1,12 @@
+{
+  "source": "ParserTest.TestCreateAggregate",
+  "phase": 4,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "CREATE AGGREGATE FUNCTION Foo(INT...) RETURNS INT LOCATION 'f.jar'",
+      "expect": "ok",
+      "dynamic": false
+    }
+  ]
+}

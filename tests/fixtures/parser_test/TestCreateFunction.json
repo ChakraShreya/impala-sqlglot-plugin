@@ -1,0 +1,137 @@
+{
+  "source": "ParserTest.TestCreateFunction",
+  "phase": 4,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "CREATE FUNCTION Foo() RETURNS INT LOCATION 'f.jar' SYMBOL='class.Udf'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION foo LOCATION 'f.jar' SYMBOL='class.Udf'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION db.foo LOCATION 'f.jar' SYMBOL='class.Udf'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION IF NOT EXISTS foo LOCATION 'f.jar' SYMBOL='class.Udf'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION IF NOT EXISTS db.foo LOCATION 'f.jar' SYMBOL='class.Udf'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION User.Foo() RETURNS INT LOCATION 'a'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION `Foo`() RETURNS INT LOCATION 'a'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION `Foo.Bar`() RETURNS INT LOCATION 'a'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION `Foo`.Bar() RETURNS INT LOCATION 'a'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION A.B.C.D.Foo() RETURNS INT LOCATION 'a'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION User.() RETURNS INT LOCATION 'a'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION User.Foo.() RETURNS INT LOCATION 'a'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION User..Foo() RETURNS INT LOCATION 'a'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION Foo() LOCATION 'a.jar' SYMBOL='class.Udf",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION FOO() RETURNS INT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION FOO() LOCATION 'foo.jar'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION Foo() RETURNS INT SYMBOL='1' LOCATION 'a'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION Foo() RETURNS INT LOCATION 'a' SYMBOL",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION Foo() RETURNS INT LOCATION 'a' SYMBOL='1' SYMBOL='2'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION Foo RETURNS INT LOCATION 'f.jar'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION Foo(INT,) RETURNS INT LOCATION 'f.jar'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION FOO RETURNS INT LOCATION 'foo.jar'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION Foo(NULL) RETURNS INT LOCATION 'f.jar'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION Foo(NULL, INT) RETURNS INT LOCATION 'f.jar'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION Foo(INT, NULL) RETURNS INT LOCATION 'f.jar'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE FUNCTION Foo() RETURNS NULL LOCATION 'f.jar'",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "source": "ParserTest.TestComputeStats",
+  "phase": 5,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "COMPUTE STATS alltypes",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "COMPUTE STATS functional.alltypes",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "COMPUTE STATS alltypes TABLESAMPLE SYSTEM(10)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "COMPUTE STATS alltypes TABLESAMPLE SYSTEM(10) REPEATABLE(10)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "COMPUTE STATS functional.alltypes TABLESAMPLE SYSTEM(10) REPEATABLE(10)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "COMPUTE functional.alltypes",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "COMPUTE STATS ON functional.alltypes",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "COMPUTE STATS",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

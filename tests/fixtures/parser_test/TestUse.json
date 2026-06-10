@@ -1,0 +1,22 @@
+{
+  "source": "ParserTest.TestUse",
+  "phase": 5,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "USE db1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "USE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "USE db1 db2",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

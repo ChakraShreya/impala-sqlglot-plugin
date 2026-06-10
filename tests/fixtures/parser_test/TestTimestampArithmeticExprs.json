@@ -1,0 +1,52 @@
+{
+  "source": "ParserTest.TestTimestampArithmeticExprs",
+  "phase": 1,
+  "has_dynamic": true,
+  "cases": [
+    {
+      "sql": "select error(a, interval b error)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a + interval b years + interval c months + interval d days",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a - interval b years - interval c months - interval d days",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a + interval b years - interval c months + interval d days",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select interval b years + a + interval c months + interval d days",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select interval b years + a - interval c months - interval d days",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select interval b years + a - interval c months + interval d days",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select date_sub(a, c, interval b year)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select date_sub(a, interval b year, c)",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

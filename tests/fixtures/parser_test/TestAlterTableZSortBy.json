@@ -1,0 +1,17 @@
+{
+  "source": "ParserTest.TestAlterTableZSortBy",
+  "phase": 4,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "ALTER TABLE TEST SORT BY ZORDER (int_col, id)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE TEST SORT BY ZORDER ()",
+      "expect": "ok",
+      "dynamic": false
+    }
+  ]
+}

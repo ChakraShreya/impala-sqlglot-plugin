@@ -1,0 +1,32 @@
+{
+  "source": "ParserTest.TestShowCurrentGroups",
+  "phase": 5,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "SHOW CURRENT GROUPS",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW CURRENT GROUPS blah",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW CURRENT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW CURRENT GROUP",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW GROUPS",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

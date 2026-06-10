@@ -1,0 +1,37 @@
+{
+  "source": "ParserTest.TestGroupBy",
+  "phase": 2,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select a, b, count(c) from test group by 1, 2",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, count(c) from test group by a, b",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, count(c) from test group by true, false, NULL",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, count(c) from test group by 1, b",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, count(c) from test group 1, 2",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, count(c) from test group by order by a",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

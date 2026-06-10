@@ -1,0 +1,47 @@
+{
+  "source": "ParserTest.TestShowRoles",
+  "phase": 5,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "SHOW ROLES",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW CURRENT ROLES",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW ROLE GRANT GROUP myGroup",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW ROLES blah",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW ROLE GRANT GROUP",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW CURRENT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW ROLE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

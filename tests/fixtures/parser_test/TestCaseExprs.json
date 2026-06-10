@@ -1,0 +1,42 @@
+{
+  "source": "ParserTest.TestCaseExprs",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select case a when '5' then x when '6' then y else z end from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select case when 'a' then x when false then y else z end from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select case when a > 2 then x when false then false else true end from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select case when NULL then NULL when NULL then NULL else NULL end from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select case a when true then x when false then y else z from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select case a when true when false then y else z end from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select case a when true, false then y else z end from t",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "source": "ParserTest.TestInsert",
+  "phase": 3,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "insert into table t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "insert table t select a from src where b > 5",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "insert overwrite table select a from src where b > 5",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "insert into table select a from src where b > 5",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "insert overwrite table t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "insert into table t",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

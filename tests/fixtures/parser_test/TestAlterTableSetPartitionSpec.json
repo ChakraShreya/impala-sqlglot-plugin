@@ -1,0 +1,6 @@
+{
+  "source": "ParserTest.TestAlterTableSetPartitionSpec",
+  "phase": 4,
+  "has_dynamic": true,
+  "cases": []
+}

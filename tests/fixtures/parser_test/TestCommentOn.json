@@ -1,0 +1,67 @@
+{
+  "source": "ParserTest.TestCommentOn",
+  "phase": 4,
+  "has_dynamic": true,
+  "cases": [
+    {
+      "sql": "COMMENT ON DATABASE db IS 'comment'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "COMMENT ON DATABASE db IS ''",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "COMMENT ON DATABASE db IS NULL",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "COMMENT ON DATABASE IS 'comment'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "COMMENT ON DATABASE db IS",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "COMMENT ON TABLE IS 'comment'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "COMMENT ON TABLE tbl IS",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "COMMENT ON VIEW IS 'comment'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "COMMENT ON VIEW tbl IS",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "COMMENT on col IS 'comment'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "COMMENT on db.tbl.col IS",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "COMMENT on tbl.col IS",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

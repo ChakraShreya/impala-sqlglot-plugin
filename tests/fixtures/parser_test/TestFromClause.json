@@ -1,0 +1,42 @@
+{
+  "source": "ParserTest.TestFromClause",
+  "phase": 2,
+  "has_dynamic": true,
+  "cases": [
+    {
+      "sql": "select * from src src1 join src src2 on ('a')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from src src1 join src src2 on (f(a, b))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from src src1 join src src2 using (1)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from src src1 join src src2 using (f(id))",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from src src1 join src src2 using id",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from a cross join b on (a.id = b.id)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from a cross join b using (id)",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

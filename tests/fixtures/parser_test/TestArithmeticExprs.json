@@ -1,0 +1,47 @@
+{
+  "source": "ParserTest.TestArithmeticExprs",
+  "phase": 1,
+  "has_dynamic": true,
+  "cases": [
+    {
+      "sql": "select (i + 5)(1 - i) from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select %a from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select *a from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select /a from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select &a from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select |a from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select ^a from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a ~ a from t",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

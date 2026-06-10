@@ -1,0 +1,67 @@
+{
+  "source": "ParserTest.TestInPredicate",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select a, b, c from t where i in (x, y, z)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where i not in (x, y, z)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where NULL in (NULL, NULL, NULL)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where true in (true, false, true)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where NULL not in (NULL, NULL, NULL)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where true not in (true, false, true)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where in (x, y, z)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where i in x, y, z",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where i in (x, y, z",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where i in x, y, z)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where i in",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where i in ( )",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

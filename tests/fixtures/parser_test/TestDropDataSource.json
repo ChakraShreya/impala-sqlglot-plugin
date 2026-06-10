@@ -1,0 +1,32 @@
+{
+  "source": "ParserTest.TestDropDataSource",
+  "phase": 4,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "DROP DATA SOURCE foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATA foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATA SRC foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATA SOURCE foo.bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATA SOURCE",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

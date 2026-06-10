@@ -1,0 +1,27 @@
+{
+  "source": "ParserTest.TestDescribeHistory",
+  "phase": 5,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "DESCRIBE HISTORY tablename",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE HISTORY databasename.tablename",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE EXTENDED HISTORY tablename",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE FORMATTED HISTORY tablename",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

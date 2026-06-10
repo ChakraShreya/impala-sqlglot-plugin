@@ -1,0 +1,67 @@
+{
+  "source": "ParserTest.TestStar",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select * from tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select tbl.* from tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select db.tbl.* from tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select db.tbl.struct_col.* from tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from tbl where f(*) = 5",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * + 5 from tbl",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select (*) from tbl",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select *.id from tbl",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from tbl.*",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from tbl where * = 5",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from tbl where tbl.* = 5",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from tbl where f(tbl.*) = 5",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

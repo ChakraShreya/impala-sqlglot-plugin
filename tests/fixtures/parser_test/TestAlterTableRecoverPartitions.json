@@ -1,0 +1,47 @@
+{
+  "source": "ParserTest.TestAlterTableRecoverPartitions",
+  "phase": 4,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "ALTER TABLE TestDb.Foo RECOVER PARTITIONS",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo RECOVER PARTITIONS",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo RECOVER PARTITIONS ()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo RECOVER PARTITIONS (i=1)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE RECOVER",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE RECOVER PARTITIONS",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo RECOVER",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo RECOVER PARTITION",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

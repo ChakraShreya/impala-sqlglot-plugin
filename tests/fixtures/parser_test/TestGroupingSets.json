@@ -1,0 +1,52 @@
+{
+  "source": "ParserTest.TestGroupingSets",
+  "phase": 2,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "SELECT a FROM foo GROUP BY GROUPING SETS((a, b))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a FROM foo GROUP BY GROUPING SETS((a, b), (a), ())",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a FROM foo GROUP BY GROUPING SETS(())",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a FROM foo GROUP BY GROUPING SETS(ROLLUP(a, b), (a), ())",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a FROM foo GROUP BY GROUPING SETS((a, b), CUBE(a), ())",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a FROM foo GROUP BY a, b, GROUPING SETS(a, b)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a FROM foo GROUP BY CUBE(a, b), GROUPING SETS(a, b)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a FROM foo GROUP BY GROUPING SETS()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a FROM foo GROUP BY GROUPING SETS((), ((a), (b))",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

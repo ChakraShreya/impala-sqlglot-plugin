@@ -1,0 +1,67 @@
+{
+  "source": "ParserTest.TestCube",
+  "phase": 2,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "SELECT a FROM foo GROUP BY CUBE(a)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY CUBE(a, b)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a FROM foo GROUP BY a WITH CUBE",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY a, b WITH CUBE",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY CUBE((a), (b))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY CUBE(a, b) WITH CUBE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY CUBE(a, ROLLUP(b, c))",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY CUBE(a, CUBE(b, c))",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY c, CUBE(a, b)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY CUBE(a, b), c",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY CUBE(a, b), CUBE(c)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT count(*) FROM foo GROUP BY CUBE()",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "source": "ParserTest.TestAlias",
+  "phase": 1,
+  "has_dynamic": true,
+  "cases": [
+    {
+      "sql": "a from tbl",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a as a, b c d from tbl",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

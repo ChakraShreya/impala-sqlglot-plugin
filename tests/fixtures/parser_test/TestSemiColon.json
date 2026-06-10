@@ -1,0 +1,62 @@
+{
+  "source": "ParserTest.TestSemiColon",
+  "phase": 0,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "SELECT 1;",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT 1 ;",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT  1  ;",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT 1;;;",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT 1 FROM functional.alltypestiny WHERE 1 = (SELECT 1);",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE functional.test_table (col INT);",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE functional.alltypes;",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SET num_nodes=1;",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": ";",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT 1 FROM functional.alltypestiny WHERE 1 = (SELECT 1;)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT 1 FROM functional.alltypestiny WHERE 1 = (SELECT 1;);",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

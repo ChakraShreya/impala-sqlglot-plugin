@@ -1,0 +1,52 @@
+{
+  "source": "ParserTest.TestComputeIncrementalStats",
+  "phase": 5,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "COMPUTE INCREMENTAL STATS functional.alltypes",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "COMPUTE INCREMENTAL STATS functional.alltypes PARTITION(month=10, year=2010)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP INCREMENTAL STATS functional.alltypes PARTITION(month=10, year=2010)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "COMPUTE INCREMENTAL STATS functional.alltypes(tinyint_col, smallint_col)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "COMPUTE INCREMENTAL STATS",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "COMPUTE INCREMENTAL functional.alltypes",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP INCREMENTAL STATS functional.alltypes",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "COMPUTE INCREMENTAL STATS functional.alltypes TABLESAMPLE SYSTEM(10)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "COMPUTE INCREMENTAL STATS functional.alltypes(tinyint_col, smallint_col",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

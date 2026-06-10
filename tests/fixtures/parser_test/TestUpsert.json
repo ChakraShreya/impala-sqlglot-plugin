@@ -1,0 +1,6 @@
+{
+  "source": "ParserTest.TestUpsert",
+  "phase": 3,
+  "has_dynamic": true,
+  "cases": []
+}

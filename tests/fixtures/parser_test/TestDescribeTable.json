@@ -1,0 +1,82 @@
+{
+  "source": "ParserTest.TestDescribeTable",
+  "phase": 5,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "DESCRIBE tablename",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE FORMATTED tablename",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE EXTENDED tablename",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE databasename.tablename",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE FORMATTED databasename.tablename",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE EXTENDED databasename.tablename",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE databasename.tablename.field1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE databasename.tablename.field1.field2",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE FORMATTED databasename.tablename.field1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE FORMATTED databasename.tablename.field1.field2",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE EXTENDED databasename.tablename.field1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE EXTENDED databasename.tablename.field1.field2",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE FORMATTED",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE EXTENDED",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

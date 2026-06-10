@@ -1,0 +1,127 @@
+{
+  "source": "ParserTest.TestCreateTableAsSelect",
+  "phase": 4,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "CREATE TABLE Foo AS SELECT 1, 2, 3",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo AS SELECT * from foo.bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo.Bar AS SELECT int_col, bool_col from tbl limit 10",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo.Bar LOCATION '/a/b' AS SELECT * from foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE IF NOT EXISTS Foo.Bar LOCATION '/a/b' AS SELECT * from foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo STORED AS PARQUET AS SELECT 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo ROW FORMAT DELIMITED STORED AS PARQUETFILE AS SELECT 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo TBLPROPERTIES ('a'='b', 'c'='d') AS SELECT * from bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo PRIMARY KEY (a, b) AS SELECT * from bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo AS with t1 as (select 1) select * from t1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo PARTITIONED BY (a) AS SELECT 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo PARTITIONED BY (a) AS SELECT 1, 2",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo PARTITIONED BY (a) AS SELECT * from Bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo PARTITIONED BY (a, b) AS SELECT * from Bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo PARTITION BY HASH(i) PARTITIONS 4 AS SELECT 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo ROW FORMAT DELIMITED STORED AS PARQUET AS SELECT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo ROW FORMAT DELIMITED STORED AS PARQUET AS WITH",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo ROW FORMAT DELIMITED STORED AS PARQUET AS",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo AS INSERT INTO Foo SELECT 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo AS UPSERT INTO Foo SELECT 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo(i int) AS SELECT 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo PARTITIONED BY(i int) AS SELECT 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo PARTITIONED BY (a=2, b) AS SELECT * from Bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo PARTITIONED BY (a, b=2) AS SELECT * from Bar",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "source": "ParserTest.TestAlterDatabaseSetDbProperties",
+  "phase": 4,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "ALTER DATABASE db SET DBPROPERTIES('a'='b')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE db SET DBPROPERTIES('a'='b', 'b'='c')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE db SET DBPROPERTIES('a'='b', 'b'='c', 'c'='d')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE db SET DBPROPERTIESS('a'='b')",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE db SET DBPROPERTIES()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE db SET DBPROPERTIES('a')",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE db SET DBPROPERTIES('a'=)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE db SET DBPROPERTIES('a'=b)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE db SET DBPROPERTIES(a='b')",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE db SET DBPROPERTIES('a'='b' 'c'='d')",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE db SET DBPROPERTIES('a'='b',)",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

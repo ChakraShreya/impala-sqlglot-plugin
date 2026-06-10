@@ -1,0 +1,12 @@
+{
+  "source": "ParserTest.TestMerge",
+  "phase": 3,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "merge into t using s on t.id = s.id when matched then delete",
+      "expect": "ok",
+      "dynamic": false
+    }
+  ]
+}

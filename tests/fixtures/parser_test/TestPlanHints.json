@@ -1,0 +1,22 @@
+{
+  "source": "ParserTest.TestPlanHints",
+  "phase": 2,
+  "has_dynamic": true,
+  "cases": [
+    {
+      "sql": "select -- +straight_join * from functional.alltypes",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select \n-- +straight_join * from functional.alltypes",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select /* /* +straight_join */ */ * from functional.alltypes",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

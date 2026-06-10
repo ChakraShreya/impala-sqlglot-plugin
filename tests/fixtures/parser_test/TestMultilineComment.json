@@ -1,0 +1,222 @@
+{
+  "source": "ParserTest.TestMultilineComment",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "/**/select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select/* */1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/** */ select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1/* **/",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/*/*/select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/*//*/select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1/***/",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/*****/select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/**//**/select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1/**/",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/*\n*/select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/*\\r*/select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/*\\r\n*/select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/**\n* Doc style\n*/select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/************\n*\n* Header style\n*\n***********/select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/* 1 */ select 1 /* 2 */",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select\n/**/\n1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/*--*/ select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/* --foo */ select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/*\n--foo */ select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/*\n--foo\n*/ select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/* select 1; */ select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/** select 1; */ select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/* select */ select 1 /* 1 */",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 /* hint_with_args(() */",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "/**/",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "/*****/",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "/* select 1 */",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "/*/ select 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 /*/",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "/**/**/select 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "/**// select 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "/**/*/ select 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "/ **/ select 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "/** / select 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "/\n**/ select 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "/**\n/ select 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 /* --bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 /*--",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 /*+ hint_with_args() */",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 /*+ hint_with_args(() */",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 /*+ hint_with_args(a)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 --+ hint_with_args(a) */\n from t",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

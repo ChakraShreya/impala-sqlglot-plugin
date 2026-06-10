@@ -1,0 +1,62 @@
+{
+  "source": "ParserTest.TestDelete",
+  "phase": 3,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "delete from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "delete a from t a",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "delete a from t a join b on a.id = b.id where true",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "delete a from t a join b where true",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "delete t from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "delete t from t where a < b",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "delete a from t a where a < b",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "delete FROM t where a < b",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "delete t where a < b",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "delete t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "delete t join f on t.id = f.id",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

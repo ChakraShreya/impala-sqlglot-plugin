@@ -1,0 +1,282 @@
+{
+  "source": "ParserTest.TestDrop",
+  "phase": 4,
+  "has_dynamic": true,
+  "cases": [
+    {
+      "sql": "DROP VIEW Foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP VIEW Foo.Bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP VIEW IF EXISTS Foo.Bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATABASE Foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATABASE Foo CASCADE",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATABASE Foo RESTRICT",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP SCHEMA Foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATABASE IF EXISTS Foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATABASE IF EXISTS Foo CASCADE",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATABASE IF EXISTS Foo RESTRICT",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP SCHEMA IF EXISTS Foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION Foo()",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP AGGREGATE FUNCTION Foo(INT)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION Foo.Foo(INT)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP AGGREGATE FUNCTION IF EXISTS Foo()",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION IF EXISTS Foo(INT)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION IF EXISTS Foo(INT...)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION Foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION IF EXISTS Foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATABASE Foo.Bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP SCHEMA Foo.Bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP SCHEMA Foo PURGE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATABASE Foo Bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATABASE Foo PURGE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATABASE CASCADE Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATABASE CASCADE RESTRICT Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP DATABASE RESTRICT CASCADE Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP CASCADE DATABASE IF EXISTS Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP RESTRICT DATABASE IF EXISTS Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP SCHEMA Foo Bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP TABLE IF Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP TABLE EXISTS Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP IF EXISTS TABLE Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP TBL Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP VIEW IF Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP VIEW EXISTS Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP IF EXISTS VIEW Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP VIW Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP VIEW Foo purge",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION Foo)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION Foo(",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION Foo PURGE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP BLAH FUNCTION",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP IF EXISTS FUNCTION Foo()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION Foo RETURNS INT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION Foo(INT) RETURNS INT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION Foo.(INT) RETURNS INT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION Foo..(INT) RETURNS INT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION Foo(NULL) RETURNS INT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION Foo(INT) RETURNS NULL",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP BLAH FUNCTION IF EXISTS Foo.A.Foo(INT)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP FUNCTION IF EXISTS Foo(...)",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

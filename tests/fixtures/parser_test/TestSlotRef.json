@@ -1,0 +1,27 @@
+{
+  "source": "ParserTest.TestSlotRef",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select a from t where b > 5",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a.b from a where b > 5",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a.b.c from a.b where b > 5",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a.b.c.d from a.b where b > 5",
+      "expect": "ok",
+      "dynamic": false
+    }
+  ]
+}

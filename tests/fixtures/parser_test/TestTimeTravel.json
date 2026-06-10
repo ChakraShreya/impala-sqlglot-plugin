@@ -1,0 +1,17 @@
+{
+  "source": "ParserTest.TestTimeTravel",
+  "phase": 2,
+  "has_dynamic": true,
+  "cases": [
+    {
+      "sql": "select * from t for system_time as of",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from t for system_version as of",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

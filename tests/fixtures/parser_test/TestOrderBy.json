@@ -1,0 +1,12 @@
+{
+  "source": "ParserTest.TestOrderBy",
+  "phase": 2,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select int_col from alltypes order by true, false, NULL",
+      "expect": "ok",
+      "dynamic": false
+    }
+  ]
+}

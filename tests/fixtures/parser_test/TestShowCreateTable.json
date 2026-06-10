@@ -1,0 +1,27 @@
+{
+  "source": "ParserTest.TestShowCreateTable",
+  "phase": 5,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "SHOW CREATE TABLE x",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW CREATE TABLE db.x",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW CREATE TABLE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW CREATE TABLE x y z",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

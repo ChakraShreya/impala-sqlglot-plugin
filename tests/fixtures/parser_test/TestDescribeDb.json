@@ -1,0 +1,37 @@
+{
+  "source": "ParserTest.TestDescribeDb",
+  "phase": 5,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "DESCRIBE DATABASE databasename",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE DATABASE FORMATTED databasename",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE DATABASE EXTENDED databasename",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE DATABASE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE DATABASE FORMATTED",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DESCRIBE DATABASE EXTENDED",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

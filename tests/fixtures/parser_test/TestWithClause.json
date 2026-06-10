@@ -1,0 +1,197 @@
+{
+  "source": "ParserTest.TestWithClause",
+  "phase": 2,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "with t as (select 1 as a) select a from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "with t(x) as (select 1 as a) select x from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "with t as (select c from tab) select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "with t(x, y) as (select * from tab) select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "with t as (values(1, 2, 3), (4, 5, 6)) select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "with t(x, y, z) as (values(1, 2, 3), (4, 5, 6)) select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "with t1 as (select 1 as a), t2 as (select 2 as a) select a from t1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from (with t as (select 1 as a) select * from t) as a",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from (with t(x) as (select 1 as a) select * from t) as a",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "insert into x with t as (select * from tab) select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "insert into x with t(x, y) as (select * from tab) select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "insert into x with t as (values(1, 2, 3)) select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "insert into x with t(x, y) as (values(1, 2, 3)) select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "with t as (select 1) insert into x select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "with t(x) as (select 1) insert into x select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "upsert into x with t as (select * from tab) select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "upsert into x with t(x, y) as (select * from tab) select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "upsert into x with t as (values(1, 2, 3)) select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "upsert into x with t(x, y) as (values(1, 2, 3)) select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "with t as (select 1) upsert into x select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "with t(x) as (select 1) upsert into x select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "with t as (select 1) insert into x with t as (select 2) select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "with t as (select 1) upsert into x with t as (select 2) select * from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "with t as () select 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "with t(x) as () select 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "with t() as (select 1 as a) select a from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from (with t as (select 1 as a)) as a",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "with t as (select 1)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "with t as select 1 as a select a from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "with t as select 1 as a union all select a from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "with t1 as (select 1 as a), t2 as select 2 as a select a from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "with t as select 1 as a select a from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "with t c1 as (select 1 as a) select c1 from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "with t as (insert into x select * from tab) select * from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "with t(c1) as (insert into x select * from tab) select * from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "with t as (upsert into x select * from tab) select * from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "with t(c1) as (upsert into x select * from tab) select * from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from t union all with t as (select 2) select * from t",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

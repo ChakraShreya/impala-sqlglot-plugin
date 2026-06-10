@@ -1,0 +1,762 @@
+{
+  "source": "ParserTest.TestCreateTable",
+  "phase": 4,
+  "has_dynamic": true,
+  "cases": [
+    {
+      "sql": "CREATE TABLE Foo (i int)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo.Bar (i int)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE IF NOT EXISTS Foo.Bar (i int)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo.Bar2 LIKE Foo.Bar1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE IF NOT EXISTS Bar2 LIKE Bar1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE EXTERNAL TABLE IF NOT EXISTS Bar2 LIKE Bar1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE EXTERNAL TABLE IF NOT EXISTS Bar2 LIKE Bar1 LOCATION '/a/b'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo2 LIKE Foo COMMENT 'sdafsdf'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo2 LIKE Foo COMMENT ''",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo2 LIKE Foo STORED AS PARQUETFILE",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo2 LIKE Foo STORED AS TEXTFILE LOCATION '/a/b'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo LIKE PARQUET '/user/foo'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE 01_Foo (01_i int, 02_j string)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, s string)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE EXTERNAL TABLE Foo (i int, s string)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE EXTERNAL TABLE Foo (i int, s string) LOCATION '/test-warehouse/'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, s string) COMMENT 'hello' LOCATION '/a/b/'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PARTITIONED BY (j string)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PARTITIONED BY (s string, d double)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, j int) SORT BY ()",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) SORT BY (i)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) SORT BY (j)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, j int) SORT BY (i,j)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo SORT BY(bar) LIKE Baz STORED AS TEXTFILE LOCATION '/a/b'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo SORT BY(bar) AS SELECT * FROM BAR",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo LIKE PARQUET '/user/foo' SORT BY (id)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, j int) SORT BY ZORDER ()",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) SORT BY ZORDER (i)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) SORT BY ZORDER (j)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, j int) SORT BY ZORDER (i,j)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo SORT BY ZORDER(bar) AS SELECT * FROM BAR",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo LIKE PARQUET '/user/foo' SORT BY ZORDER (id)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int COMMENT 'hello', s string)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int COMMENT 'hello', s string COMMENT 'hi')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int COMMENT 'hi') PARTITIONED BY (j int COMMENT 'bye')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT) STORED AS KUDU",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT PRIMARY KEY) STORED AS KUDU",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT, j INT, PRIMARY KEY (i, j)) STORED AS KUDU",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT, j INT, PRIMARY KEY (j, i)) STORED AS KUDU",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT PRIMARY KEY, PRIMARY KEY(i)) STORED AS KUDU",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT PRIMARY KEY, j INT PRIMARY KEY) STORED AS KUDU",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT NON UNIQUE PRIMARY KEY) STORED AS KUDU",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT, j STRING) STORED AS JDBC",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT) STORED BY KUDU",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT) STORED BY ICEBERG",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT) STORED BY JDBC",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "create table foo(id int, year int, primary key (id))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "create table foo(id int, year int, primary key (id, year))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) ROW FORMAT DELIMITED",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) ROW FORMAT DELIMITED LINES TERMINATED BY '|'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) ROW FORMAT DELIMITED ESCAPED BY ''",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) COMMENT 'hi' ROW FORMAT DELIMITED STORED AS RCFILE",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) CACHED IN 'myPool'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) CACHED IN 'myPool' WITH REPLICATION = 4",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PARTITIONED BY(j int) CACHED IN 'myPool'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PARTITIONED BY(j int) CACHED IN 'myPool'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, s string) PRODUCED BY DATA SOURCE Bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, s string) PRODUCED BY DATA SOURCE Bar(\"\")",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE IF NOT EXISTS Foo (i int) PRODUCED BY DATA SOURCE Bar(\"\")",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PARTITION BY HASH(i) PARTITIONS 4",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PARTITION BY HASH PARTITIONS 4",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PARTITION BY RANGE (PARTITION VALUE = 10)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo(a int PRIMARY KEY, b int DEFAULT 1+1) STORED AS KUDU",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PARTITIONED BY (int)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PARTITIONED BY ()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PARTITIONED BY",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, j int) SORT BY",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, j int) SORT BY (i,)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, j int) SORT BY (int)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo AS SELECT * FROM BAR SORT BY(bar)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo SORT BY (id) LIKE PARQUET '/user/foo'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, j int) SORT BY ZORDER",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, j int) SORT BY ZORDER (i,)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, j int) SORT BY ZORDER (int)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo AS SELECT * FROM BAR SORT BY ZORDER(bar)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo SORT BY ZORDER (id) LIKE PARQUET '/user/foo'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT) PRIMARY KEY (i) STORED AS KUDU",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT, PRIMARY KEY) STORED AS KUDU",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (PRIMARY KEY(a), a INT) STORED AS KUDU",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT) NON UNIQUE PRIMARY KEY (i) STORED AS KUDU",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT, NON UNIQUE PRIMARY KEY) STORED AS KUDU",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (NON UNIQUE PRIMARY KEY(a), a INT) STORED AS KUDU",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT) PRIMARY KEY (i) STORED AS JDBC",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT) STORED BY PARQUET",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT) STORED BY FOOBAR",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE foo (i INT) STORED BY",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) SERDEPROPERTIES ('a'='b')",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, s string) STORED AS SEQFILE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int, s string) STORED TEXTFILE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo LIKE Bar STORED AS TEXT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo LIKE Bar COMMENT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo LIKE Bar STORED TEXTFILE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo LIKE Bar STORED AS",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo LIKE Bar LOCATION",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) ROW FORMAT DELIMITED TERMINATED BY '\\0'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) ROW FORMAT DELIMITED FIELDS TERMINATED BY",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) ROW FORMAT DELIMITED LINES TERMINATED BY",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) ROW FORMAT DELIMITED ESCAPED BY",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) ROW FORMAT DELIMITED FIELDS TERMINATED '|'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) ROW FORMAT DELIMITED FIELDS TERMINATED BY |",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) ROW FORMAT DELIMITED FIELDS BY '\\0'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) ROW FORMAT DELIMITED LINES BY '\n'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) FIELDS TERMINATED BY '\\0'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) ROWS TERMINATED BY '\\0'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE T (i int) ESCAPED BY '\\0'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double) COMMENT 'c' PARTITIONED BY (i int)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double) STORED AS TEXTFILE COMMENT 'c'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double) STORED AS TEXTFILE ROW FORMAT DELIMITED",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double) ROW FORMAT DELIMITED COMMENT 'c'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double) LOCATION 'a' COMMENT 'c'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double) UNCACHED LOCATION '/a/b'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double) CACHED IN 'pool' LOCATION '/a/b'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double) LOCATION 'a' COMMENT 'c' STORED AS RCFILE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double) LOCATION 'a' STORED AS RCFILE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double) TBLPROPERTIES('a'='b') LOCATION 'a'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) LOCATION 'a' WITH SERDEPROPERTIES('a'='b')",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double) LOCATION a",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double) COMMENT c",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double COMMENT c)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double COMMENT 'c') PARTITIONED BY (j COMMENT hi)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double) STORED AS 'TEXTFILE'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) CACHED IN myPool",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PARTITIONED BY(j int) CACHED IN",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) CACHED 'myPool'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) IN 'myPool'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) CACHED IN 'myPool' WITH REPLICATION = -1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) CACHED IN 'myPool' WITH REPLICATION = 1.0",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE IF EXISTS Foo.Bar (i int)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Bar LIKE Bar2 (i int)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE IF NOT EXISTS TABLE Foo.Bar (i int)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double) STORED TEXTFILE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (d double) AS TEXTFILE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo i int",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i intt)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (int i)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int,)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo ()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE EXTERNAL",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PRODUCED BY DATA Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PRODUCED BY DATA SRC Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PRODUCED BY DATA SOURCE Foo.Bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PRODUCED BY DATA SOURCE Foo()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE EXTERNAL TABLE Foo (i int) PRODUCED BY DATA SOURCE Foo(\"\")",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (i int) PARTITION BY HASH(i)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE EXTERNAL TABLE Foo PARTITION BY HASH PARTITIONS 4",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo (a int) PARTITION BY RANGE (a) ()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE Foo(a int PRIMARY KEY BLOCK_SIZE -1) STORED AS KUDU",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE TABLE (i int, s string) CLUSTERED INTO 24 BUCKETS",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

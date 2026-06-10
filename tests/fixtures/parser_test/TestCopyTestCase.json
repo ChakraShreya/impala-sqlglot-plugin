@@ -1,0 +1,62 @@
+{
+  "source": "ParserTest.TestCopyTestCase",
+  "phase": 5,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "copy testcase to 'hdfs:///foo' select * from tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "copy testcase to 'hdfs:///foo' with v as (select 1) select * from v",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "copy testcase to 'hdfs:///foo' select * from t1 union select * from t2",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "copy testcase from 'hdfs:///foo'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select testcase from foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "copy testcase to 'hdfs:///foo' alter table foo add partition (p=1)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "copy testcase to 'hdfs:///foo' insert into t values (1)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "copy testcase to select * from tbl",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "copy testcase to hdfs:///foo select * from tbl",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "copy testcase from hdfs:///foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "copy testcase",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

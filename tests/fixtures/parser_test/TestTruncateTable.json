@@ -1,0 +1,52 @@
+{
+  "source": "ParserTest.TestTruncateTable",
+  "phase": 4,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "TRUNCATE TABLE Foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "TRUNCATE TABLE Foo.Bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "TRUNCATE Foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "TRUNCATE Foo.Bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "TRUNCATE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "TRUNCATE TABLE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "TRUNCATE TBL Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "TRUNCATE VIEW Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "TRUNCATE DATABASE Foo",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

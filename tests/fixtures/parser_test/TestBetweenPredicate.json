@@ -1,0 +1,72 @@
+{
+  "source": "ParserTest.TestBetweenPredicate",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select a, b, c from t where i between x and y",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where i not between x and y",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where true not between false and NULL",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where 'abc' between 'a' like 'a' and 'b' like 'b'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where true and false and i between x and y",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where i between x and y and true and false",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where i between x and (y and true) and false",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where i between x and (y and (true and false))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where between 5 and 10",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where i between and 10",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where i between 5 and",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where i between",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from t where true between 5 or 10 and 20",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

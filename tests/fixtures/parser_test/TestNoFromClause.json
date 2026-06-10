@@ -1,0 +1,42 @@
+{
+  "source": "ParserTest.TestNoFromClause",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select 1 + 1, 'two', f(3), a + b",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 + 1 'two' f(3) a + b",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, 2 where a > 2",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, 2 group by",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, 2 order by 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, 2 limit 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, 2 order by 1 limit 1",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

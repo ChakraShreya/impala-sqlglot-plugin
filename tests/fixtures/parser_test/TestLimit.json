@@ -1,0 +1,42 @@
+{
+  "source": "ParserTest.TestLimit",
+  "phase": 2,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select a, b, c from test inner join test2 using(a) limit 10",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from test inner join test2 using(a) limit 10 + 10",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from test inner join test2 using(a) limit 'a'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from test inner join test2 using(a) limit a",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from test inner join test2 using(a) limit true",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from test inner join test2 using(a) limit false",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c from test inner join test2 using(a) limit NULL",
+      "expect": "ok",
+      "dynamic": false
+    }
+  ]
+}

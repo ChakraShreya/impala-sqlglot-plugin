@@ -1,0 +1,57 @@
+{
+  "source": "ParserTest.TestFunctionCallExprs",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select f1(5), f2('five'), f3(5.0, i + 5) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select f1(true), f2(true and false), f3(null) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select f1(*)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select f1(distinct col)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select f1(distinct col, col2)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select decode(col, col2, col3)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select nullif(col, col2) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select _impala_builtins.nullif(col, col2) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select f( from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select f(5.0 5.0) from t",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

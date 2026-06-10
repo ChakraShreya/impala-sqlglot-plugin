@@ -1,0 +1,72 @@
+{
+  "source": "ParserTest.TestRollup",
+  "phase": 2,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "SELECT a FROM foo GROUP BY ROLLUP(a)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY ROLLUP(a, b)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a FROM foo GROUP BY a WITH ROLLUP",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY a, b WITH ROLLUP",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY ROLLUP((a), (b))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY ROLLUP(a, b) WITH ROLLUP",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY ROLLUP(a, ROLLUP(b, c))",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY ROLLUP(a, CUBE(b, c))",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY c, ROLLUP(a, b)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY ROLLUP(a, b), c",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY ROLLUP(a, b), ROLLUP(c)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo GROUP BY ROLLUP(a, b), CUBE(c, d)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT count(*) FROM foo GROUP BY ROLLUP()",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

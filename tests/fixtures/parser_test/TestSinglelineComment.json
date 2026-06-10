@@ -1,0 +1,87 @@
+{
+  "source": "ParserTest.TestSinglelineComment",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select 1--",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 --foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 --\ncol_name",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "--foo's \nselect 1 --bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "--foo\nselect 1 --bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "--foo\\r\nselect 1 --bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "--/* foo */\n select 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 --/**/",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "-- foo /*\nselect 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select -- blah\n 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select -- select 1\n 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 -- hint_with_args(()",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "--",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "--select 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "-- baz /*\nselect 1*/",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 -- +hint_with_args(()",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

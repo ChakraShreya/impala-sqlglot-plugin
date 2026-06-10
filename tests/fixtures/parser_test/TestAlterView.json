@@ -1,0 +1,177 @@
+{
+  "source": "ParserTest.TestAlterView",
+  "phase": 4,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "ALTER VIEW Bar AS SELECT 1, 2, 3",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Bar AS SELECT a, b, c FROM t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Bar AS VALUES(1, 2, 3)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Bar AS SELECT 1, 2, 3 UNION ALL select 4, 5, 6",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Bar (x, y, z) AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Bar (x, y COMMENT 'foo', z) AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar AS SELECT 1, 2, 3",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar AS SELECT a, b, c FROM t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar AS VALUES(1, 2, 3)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar AS SELECT 1, 2, 3 UNION ALL select 4, 5, 6",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar AS WITH t AS (SELECT 1, 2, 3) SELECT * FROM t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar (x, y, z) AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar (x, y, z COMMENT 'foo') AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Bar (x, y) AS SELECT 1, 2, 3",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar SET TBLPROPERTIES ('pro1' = '1', 'pro2' = '2')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar UNSET TBLPROPERTIES ('pro1', 'pro2')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE Foo.Bar AS SELECT 1, 2, 3",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW AS SELECT 1, 2, 3",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar SELECT 1, 2, 3",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar AS",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar () AS SELECT c FROM t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar (x int) AS SELECT c FROM t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar (x int COMMENT 'x') AS SELECT c FROM t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar (int COMMENT 'x') AS SELECT c FROM t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar AS INSERT INTO t select * from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar AS UPSERT INTO t select * from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar AS CREATE TABLE Wrong (i int)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar AS ALTER TABLE Foo COLUMNS (i int, s string)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar AS CREATE VIEW Foo.Bar AS SELECT 1, 2, 3",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar AS ALTER VIEW Foo.Bar AS SELECT 1, 2, 3",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar SET TBLPROPERTIES ()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar SET TBLPROPERTIES (int COMMENT 'x')",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar UNSET TBLPROPERTIES ()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER VIEW Foo.Bar UNSET TBLPROPERTIES (int COMMENT 'x')",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

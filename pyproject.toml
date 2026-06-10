@@ -41,3 +41,11 @@ include = ["impala_sqlglot*"]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_functions = ["test_*"]
+markers = [
+    "phase0: Phase 0 — foundation and tokenizer tests",
+    "phase1: Phase 1 — expressions and literals",
+    "phase2: Phase 2 — query shape (FROM, set ops, hints)",
+    "phase3: Phase 3 — DML statements",
+    "phase4: Phase 4 — DDL and types",
+    "phase5: Phase 5 — SHOW, admin, metadata",
+]

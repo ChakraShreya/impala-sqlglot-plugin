@@ -1,0 +1,122 @@
+{
+  "source": "ParserTest.TestAdminFns",
+  "phase": 5,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": ":foobar()",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": ": foobar()",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": ":\tfoobar()",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": ":\tfoobar()",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": ":foobar()",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": ":foobar(123)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": ":foobar(123, 456)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": ":foobar('foo', 'bar')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": ":foobar('foo', 'bar', 1, -1, 1234, 99, false)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": ": 1a()",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "foobar()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "foobar()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": ": 1()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": ": 'string'()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": ": a.b()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": ": shutdown",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": ": shutdown foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": ": shutdown() other()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": ": shutdown(); other()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": ": shutdown(), other()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": ": shutdown() :other()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": ": shutdown() :other()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": ": shutdown('hostA'); :shutdown('hostB');",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

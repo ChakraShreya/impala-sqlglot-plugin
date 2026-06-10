@@ -1,0 +1,117 @@
+{
+  "source": "ParserTest.TestResetMetadata",
+  "phase": 5,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "invalidate metadata",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "invalidate metadata Foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "invalidate metadata Foo.S",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "refresh Foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "refresh Foo.S",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "refresh Foo partition (col=2)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "refresh Foo partition (col=2) partition (col=3)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "refresh Foo.S partition (col=2)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "refresh Foo.S partition (col1 = 2, col2 = 3)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "refresh functions Foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "refresh authorization",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "invalidate",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "invalidate metadata Foo.S.S",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "invalidate metadata partition (col=2)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "invalidate metadata Foo.S partition (col=2)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "REFRESH Foo.S.S",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "refresh",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "refresh Foo.S partition (col1 = 2, col2)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "refresh Foo.S partition ()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "refresh Foo.S partition (col1 = 0), (col1 = 1)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "refresh functions Foo.S",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "refresh authorization Foo",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

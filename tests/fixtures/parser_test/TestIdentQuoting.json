@@ -1,0 +1,182 @@
+{
+  "source": "ParserTest.TestIdentQuoting",
+  "phase": 0,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select a from `t`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from default.`t`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from default.t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from default.`t`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 01a from default.`01_t`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select `a` from default.t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select `tbl`.`a` from default.t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select `db`.`tbl`.`a` from default.t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select `12db`.`tbl`.`12_a` from default.t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select `8e6`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select `4.5e2`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select `.7e9`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select `db`.tbl.`a` from default.t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select `db.table.a` from default.t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `a a a    `",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `    a a a`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `    a a a    `",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `all types`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from default.`all types`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `~!@#$%^&*()-_=+|;:'\",<.>/?`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `ab\\rabc`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `ab\tabc`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `ab\\fabc`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `ab\\babc`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `ab\nabc`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `abc\\u0000abc`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `abc\\u0019abc`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `abc\\u007fabc`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select `select`, `insert`, `upsert` from `table` where `where` = 10",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from ` `",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `    `",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from ``",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `abcde`abcde`",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from `abc\\u0060abc`",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from 'default'.'t'",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

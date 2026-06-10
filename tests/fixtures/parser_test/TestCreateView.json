@@ -1,0 +1,182 @@
+{
+  "source": "ParserTest.TestCreateView",
+  "phase": 4,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "CREATE VIEW Bar AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Bar COMMENT 'test' AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Bar (x, y, z) AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Bar (x, y COMMENT 'foo', z) AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Bar (x, y, z) COMMENT 'test' AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW IF NOT EXISTS Bar AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar COMMENT 'test' AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar (x, y, z) AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar (x, y, z COMMENT 'foo') AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar (x, y, z) COMMENT 'test' AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW IF NOT EXISTS Foo.Bar AS SELECT a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Bar AS SELECT 1, 2, 3",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Bar AS VALUES(1, 2, 3)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Bar AS SELECT 1, 2, 3 UNION ALL select 4, 5, 6",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Bar AS WITH t AS (SELECT 1, 2, 3) SELECT * FROM t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Bar (x, y) AS SELECT 1, 2, 3",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Bar (x, y, z) TBLPROPERTIES ('a' = 'b') AS SELECT 1, 2, 3",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Bar TBLPROPERTIES ('a' = 'b') AS VALUES(1, 2, 3)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Bar TBLPROPERTIES ('a' = 'b') AS SELECT 1, 2, 3",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW AS SELECT c FROM t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Bar SELECT c FROM t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar () AS SELECT c FROM t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar (x int) AS SELECT c FROM t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar (x int COMMENT 'x') AS SELECT c FROM t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar (int COMMENT 'x') AS SELECT c FROM t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar (x) AS",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar (x) AS INSERT INTO t select * from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar (x) AS UPSERT INTO t select * from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar (x) AS CREATE TABLE Wrong (i int)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar (x) AS ALTER TABLE Foo COLUMNS (i int, s string)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar (x) AS CREATE VIEW Foo.Bar AS SELECT 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Foo.Bar (x) AS ALTER VIEW Foo.Bar AS SELECT 1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Bar (x, y, z) TBLPROPERTIES () AS SELECT 1, 2, 3",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE VIEW Bar (x, y, z) TBLPROPERTIES (i int) AS SELECT 1, 2, 3",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

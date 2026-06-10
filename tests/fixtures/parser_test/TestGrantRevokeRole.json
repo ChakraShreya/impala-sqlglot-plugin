@@ -1,0 +1,42 @@
+{
+  "source": "ParserTest.TestGrantRevokeRole",
+  "phase": 4,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "GRANT ROLE foo TO GROUP bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "REVOKE ROLE foo FROM GROUP bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "GRANT ROLE `foo` TO GROUP `bar`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "GRANT ROLE foo TO GROUP",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "GRANT ROLE foo FROM GROUP bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "REVOKE ROLE foo FROM GROUP",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "REVOKE ROLE foo TO GROUP bar",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

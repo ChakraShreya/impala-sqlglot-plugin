@@ -1,0 +1,67 @@
+{
+  "source": "ParserTest.TestWhereClause",
+  "phase": 2,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select a, b from t where a > 15",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b from t where true",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b from t where NULL",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b from t where case a when b then true else false end",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b from t where if (a > b, true, false)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b from t where bool_col",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b from t where 10.5",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b from t where trim('abc')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b from t where s + 20",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b from t where a > 15 from test",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b where a > 15",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select where a, b from t",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

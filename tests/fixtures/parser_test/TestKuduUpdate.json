@@ -1,0 +1,12 @@
+{
+  "source": "ParserTest.TestKuduUpdate",
+  "phase": 3,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "update (select * from functional_kudu.testtbl) a set name = '10'",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

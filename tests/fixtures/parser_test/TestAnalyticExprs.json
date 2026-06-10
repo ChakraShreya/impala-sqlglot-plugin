@@ -1,0 +1,27 @@
+{
+  "source": "ParserTest.TestAnalyticExprs",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select sum(v) over (partition by a, 2*b) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select sum(v) over (partition by a, 2*b) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select sum(v) over (partition by a, 2*b) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select decode(1, 2, 3) over () from t",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

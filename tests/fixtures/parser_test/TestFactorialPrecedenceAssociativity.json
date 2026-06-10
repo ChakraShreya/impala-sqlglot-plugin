@@ -1,0 +1,22 @@
+{
+  "source": "ParserTest.TestFactorialPrecedenceAssociativity",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "SELECT 3 + 3!",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT 3! = 4",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT 3 != 4",
+      "expect": "ok",
+      "dynamic": false
+    }
+  ]
+}

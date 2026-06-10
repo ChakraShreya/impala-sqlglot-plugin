@@ -1,0 +1,37 @@
+{
+  "source": "ParserTest.TestConditionalExprs",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select if(TRUE, TRUE, FALSE) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select if(NULL, NULL, NULL) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select c1, c2, if(TRUE, TRUE, FALSE) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select if(1 = 2, c1, c2) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select if(1 = 2, c1, c2)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select if()",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "source": "ParserTest.TestSelect",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select a from tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, c, d from tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select true, false, NULL from tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select all a, b, c from tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "a from tbl",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a b c from tbl",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select all from tbl",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

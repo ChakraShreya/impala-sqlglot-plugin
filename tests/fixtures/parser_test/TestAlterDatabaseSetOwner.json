@@ -1,0 +1,52 @@
+{
+  "source": "ParserTest.TestAlterDatabaseSetOwner",
+  "phase": 4,
+  "has_dynamic": true,
+  "cases": [
+    {
+      "sql": "ALTER DATABASE db SET ABC USER foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE db SET ABC ROLE foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE db SET OWNER ABC foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE db SET OWNER USER",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE SET OWNER foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE SET OWNER USER foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE db SET OWNER ROLE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE SET OWNER ROLE foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER DATABASE SET OWNER",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "source": "ParserTest.TestAggregateExprs",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select count(*), count(a), count(distinct a, b) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select count(all *) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select count(all 1) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select min(a), min(distinct a) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select max(a), max(distinct a) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select sum(a), sum(distinct a) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select avg(a), avg(distinct a) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select distinct a, b, c from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select distinctpc(a), distinctpc(distinct a) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select distinctpcsa(a), distinctpcsa(distinct a) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select ndv(a), ndv(distinct a) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select group_concat(a) from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select group_concat(a, ', ') from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select group_concat(a, ', ', c) from t",
+      "expect": "ok",
+      "dynamic": false
+    }
+  ]
+}

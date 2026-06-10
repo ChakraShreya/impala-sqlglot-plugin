@@ -1,0 +1,62 @@
+{
+  "source": "ParserTest.TestLoadData",
+  "phase": 4,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "LOAD DATA INPATH '/a/b' INTO TABLE Foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "LOAD DATA INPATH '/a/b' INTO TABLE Foo.Bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "LOAD DATA INPATH '/a/b' OVERWRITE INTO TABLE Foo.Bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "LOAD DATA INPATH '/a/b' INTO TABLE Foo PARTITION(a=1, b='asdf')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "LOAD DATA INPATH '/a/b' INTO TABLE Foo PARTITION(a=1)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "LOAD DATA INPATH '/a/b' INTO Foo PARTITION(a=1)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "LOAD DATA INPATH '/a/b' INTO Foo PARTITION(a)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "LOAD DATA INPATH '/a/b' INTO Foo PARTITION",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "LOAD DATA INPATH /a/b/c INTO Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "LOAD DATA INPATH /a/b/c INTO Foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "LOAD DATA LOCAL INPATH '/a/b' INTO TABLE Foo",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

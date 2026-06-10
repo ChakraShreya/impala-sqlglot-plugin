@@ -1,0 +1,327 @@
+{
+  "source": "ParserTest.TestLiteralExprs",
+  "phase": 1,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select -1 from t where -1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select - 1 from t where - 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a - - 1 from t where a - - 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a - - - 1 from t where a - - - 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select +1 from t where +1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select + 1 from t where + 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a + + 1 from t where a + + 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a + + + 1 from t where a + + + 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select +1.0 from t where +1.0",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select +-1.0 from t where +-1.0",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select +1.-0 from t where +1.-0",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 8e6 from t where 8e6",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select +8e6 from t where +8e6",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 8e+6 from t where 8e+6",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select -8e6 from t where -8e6",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 8e-6 from t where 8e-6",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select -8e-6 from t where -8e-6",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 4.5e2 from t where 4.5e2",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select +4.5e2 from t where +4.5e2",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 4.5e+2 from t where 4.5e+2",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select -4.5e2 from t where -4.5e2",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 4.5e-2 from t where 4.5e-2",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select -4.5e-2 from t where -4.5e-2",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select .7e9 from t where .7e9",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select +.7e9 from t where +.7e9",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select .7e+9 from t where .7e+9",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select -.7e9 from t where -.7e9",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select .7e-9 from t where .7e-9",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select -.7e-9 from t where -.7e-9",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select -+-1 from t where -+-1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select - +- 1 from t where - +- 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 + -+ 1 from t where 1 + -+ 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select true from t where true",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select false from t where false",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select date '2011-01-01'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select date '2011-1-01'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select date '2011-1-1'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select NULL from t where NULL",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select 'five', 5, 5.0, i + 5 from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select \"\\\"five\\\"\" from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select \"'five'\" from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select \"'five\" from t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT '@'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select date '2011-001-1'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select date '2011-01-001'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select date '2011-oct-01'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select date '2011-01-0'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select date '2011-01-40'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select date '2011-01-'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select date '2011--01'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select date '2001-02-31'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select --1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1- from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select 1 + from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select /1 from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select *1 from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select &1 from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select =1 from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select '5 from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select \"5 from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select '5 from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select `5 from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select \"\"five\"\" from t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select 5.0.5 from t",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

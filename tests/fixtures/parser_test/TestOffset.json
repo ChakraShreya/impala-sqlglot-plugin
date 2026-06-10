@@ -1,0 +1,62 @@
+{
+  "source": "ParserTest.TestOffset",
+  "phase": 2,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select a from test order by a limit 10 offset 5",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from test order by a limit 10 offset 0",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from test order by a limit 10 offset 0 + 5 / 2",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from test order by a asc limit 10 offset 5",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from test order by a offset 5",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from test limit 10 offset 5",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from test offset 5",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from (select a from test offset 5) A",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from (select a from test order by a offset 5) A",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from test order by a limit offset",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a from test order by a limit offset 5",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

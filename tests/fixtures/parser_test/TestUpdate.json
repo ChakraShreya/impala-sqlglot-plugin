@@ -1,0 +1,67 @@
+{
+  "source": "ParserTest.TestUpdate",
+  "phase": 3,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "update t set x = 3 where a < b",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "update t set x = (3 + length(\"hallo\")) where a < 'adasas'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "update t set x = 3",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "update t set x=3, x=4 from a.b t where b = 10",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "update t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "update t set x < 3",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "update t set x",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "update t set 4 = x",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "update from t set x = 3",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "update t where x = 4",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "update t a set a = 10  where x = 4",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "update t a from t b where set a = 10 x = 4",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

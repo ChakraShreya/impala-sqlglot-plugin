@@ -1,0 +1,22 @@
+{
+  "source": "ParserTest.TestAlterTableSortBy",
+  "phase": 4,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "ALTER TABLE TEST SORT BY (int_col, id)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE TEST SORT BY ()",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "ALTER TABLE TEST PARTITION (year=2009, month=4) SORT BY (int_col, id)",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

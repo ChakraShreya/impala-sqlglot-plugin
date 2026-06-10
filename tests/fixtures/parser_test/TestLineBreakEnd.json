@@ -1,0 +1,97 @@
+{
+  "source": "ParserTest.TestLineBreakEnd",
+  "phase": 0,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "--test\nSELECT 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "--test\nSELECT 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "--test",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "--test",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "INSERT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "INSERT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

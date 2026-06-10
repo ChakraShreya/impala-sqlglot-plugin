@@ -1,0 +1,6 @@
+{
+  "source": "ParserTest.TestAlterTableAlterColumn",
+  "phase": 4,
+  "has_dynamic": true,
+  "cases": []
+}

@@ -1,0 +1,62 @@
+{
+  "source": "ParserTest.TestOptimize",
+  "phase": 3,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "optimize table t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "optimize table t (file_size_threshold_mb=10)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "optimize table t (file_size_threshold_mb=0)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "optimize table t file_size_threshold_mb=10",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "optimize table t file_size_threshold_mb 10",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "optimize table t (file_size_threshold_mb=-10)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "optimize table t (file_size_threshold_mb=0.1)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "optimize table t 10",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "optimize t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "optimize table t for system_time as of now()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "optimize table t for system_version as of 12345",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

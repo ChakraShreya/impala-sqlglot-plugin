@@ -1,0 +1,6 @@
+{
+  "source": "ParserTest.TestAlterTableOrViewSetOwner",
+  "phase": 4,
+  "has_dynamic": true,
+  "cases": []
+}

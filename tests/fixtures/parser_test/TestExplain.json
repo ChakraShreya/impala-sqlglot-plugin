@@ -1,0 +1,37 @@
+{
+  "source": "ParserTest.TestExplain",
+  "phase": 5,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "explain select a from tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "explain insert into tbl select a, b, c, d from tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "explain upsert into tbl select a, b, c, d from tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "explain",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "explain explain select a from tbl",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "explain CREATE TABLE Foo (i int)",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

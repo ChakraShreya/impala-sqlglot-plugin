@@ -1,0 +1,197 @@
+{
+  "source": "ParserTest.TestSubqueries",
+  "phase": 2,
+  "has_dynamic": true,
+  "cases": [
+    {
+      "sql": "SELECT * FROM foo WHERE a+1 > (SELECT count(a) FROM bar)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE (SELECT count(a) FROM bar) < a+1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE a IN (SELECT a FROM bar)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE a NOT IN (SELECT a FROM bar)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE EXISTS (SELECT a FROM bar WHERE b > 0)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE NOT EXISTS (SELECT a FROM bar WHERE b > 0)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE NOT (EXISTS (SELECT a FROM bar))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE EXISTS ((SELECT * FROM bar))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE EXISTS (((SELECT * FROM bar)))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE a IN ((SELECT a FROM bar))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE a = ((SELECT max(a) FROM bar))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b, (SELECT c FROM foo) FROM foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT (SELECT a FROM foo), b, c FROM bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT (SELECT (SELECT a FROM foo) FROM bar) FROM baz",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT (SELECT a FROM foo)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, count(*) FROM foo GROUP BY (SELECT a FROM bar)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, count(*) FROM foo GROUP BY a, (SELECT b FROM bar)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo ORDER BY (SELECT a FROM bar)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo ORDER BY (SELECT a FROM bar) DESC",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, b FROM foo ORDER BY a ASC, (SELECT a FROM bar) DESC",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE a IN SELECT a FROM bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE a = SELECT count(*) FROM bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE EXISTS SELECT * FROM bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE a IN (SELECT a FROM bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE a IN SELECT a FROM bar)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE a IN (SELECT) a FROM bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE a EXISTS (SELECT * FROM bar)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT * FROM foo WHERE a NOT EXISTS (SELECT * FROM bar)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT SELECT a FROM foo FROM bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT (SELECT a FROM foo FROM bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT SELECT a FROM foo) FROM bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT (SELECT) a FROM foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, count(*) FROM foo GROUP BY SELECT a FROM bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, count(*) FROM foo GROUP BY (SELECT) a FROM bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, count(*) FROM foo GROUP BY (SELECT a FROM bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, count(*) FROM foo ORDER BY SELECT a FROM bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, count(*) FROM foo ORDER BY (SELECT) a FROM bar DESC",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, count(*) FROM foo ORDER BY (SELECT a FROM bar ASC",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

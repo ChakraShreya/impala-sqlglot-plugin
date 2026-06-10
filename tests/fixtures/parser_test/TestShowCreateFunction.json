@@ -1,0 +1,47 @@
+{
+  "source": "ParserTest.TestShowCreateFunction",
+  "phase": 5,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "SHOW CREATE FUNCTION foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW CREATE FUNCTION foo.bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW CREATE AGGREGATE FUNCTION foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW CREATE AGGREGATE FUNCTION foo.bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW CREATE FUNCTION",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW CREATE AGGREGATE FUNCTION",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW CREATE ANALYTIC FUNCTION foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW CREATE AGGREGATE ANALYTIC FUNCTION foo",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

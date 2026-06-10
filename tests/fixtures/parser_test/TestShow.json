@@ -1,0 +1,362 @@
+{
+  "source": "ParserTest.TestShow",
+  "phase": 5,
+  "has_dynamic": true,
+  "cases": [
+    {
+      "sql": "SHOW TABLES",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW VIEWS",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW TABLES 'tablename|othername'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW VIEWS 'tablename|othername'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW TABLES LIKE 'tablename|othername'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW VIEWS LIKE 'tablename|othername'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW TABLES IN db LIKE 'tablename|othername'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW VIEWS IN db LIKE 'tablename|othername'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW TABLES ''",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW VIEWS ''",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW METADATA TABLES IN tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW METADATA TABLES IN tbl 'e*'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW METADATA TABLES IN tbl LIKE 'e*'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW METADATA TABLES IN db.tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW METADATA TABLES IN db.tbl 'e*'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW METADATA TABLES IN db.tbl LIKE 'e*'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW DATABASES",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW SCHEMAS",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW DATABASES LIKE 'pattern'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW SCHEMAS LIKE 'p*ttern'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW DATA SOURCES",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW DATA SOURCES 'pattern'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW DATA SOURCES LIKE 'pattern'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW DATA SOURCES LIKE 'p*ttern'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW TABLE STATS tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW TABLE STATS db.tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW TABLE STATS `db`.`tbl`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW COLUMN STATS tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW COLUMN STATS db.tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW COLUMN STATS `db`.`tbl`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS db.tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS `db`.`tbl`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE year = 2025 and month < 6",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE year IN (2009, 2010)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE year BETWEEN 2009 AND 2010",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE month IS NULL",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE month IS NOT NULL",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE string_col LIKE '2%'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE string_col REGEXP '^partition'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE month + 1 = 2",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE CAST(string_col AS INT) > 0",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE CASE WHEN year > 2009 THEN 1 ELSE 0 END = 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE month = rand()",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE month <= floor(rand() * 12) + 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE rand() < 0.5",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE month = length(uuid()) / 3",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE year <= year(now())",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW PARTITIONS tbl WHERE month = month(now())",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW RANGE PARTITIONS tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW RANGE PARTITIONS db.tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW RANGE PARTITIONS `db`.`tbl`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW FILES IN tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW FILES IN db.tbl",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW FILES IN `db`.`tbl`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW FILES IN db.tbl PARTITION(x='a',y='b')",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW FILES IN db.tbl PARTITION(p)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW TABLES tablename",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW VIEWS tablename",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW TABLES IN db.tbl",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW METADATA TABLES IN db.tbl.files",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW DATA",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW SOURCE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW DATA SOURCE LIKE NotStrLiteral",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW UNKNOWN FUNCTIONS",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW STATS tbl",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW TABLE STATS",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW COLUMN STATS",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW TABLE STATS 'strlit'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SHOW FILES IN",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

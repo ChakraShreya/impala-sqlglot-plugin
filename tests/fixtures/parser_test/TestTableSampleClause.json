@@ -1,0 +1,57 @@
+{
+  "source": "ParserTest.TestTableSampleClause",
+  "phase": 2,
+  "has_dynamic": true,
+  "cases": [
+    {
+      "sql": "select * from t tablesample (10) a",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from t [schedule_remote] tablesample (10)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from t /* +schedule_remote */ tablesample (10)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from t tablesample (10)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from t tablesample system 10",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from t tablesample system (10 + 10",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from t tablesample system (10) repeatable",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from t tablesample system (10) repeatable (10 + 10)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from t tablesample system (-10)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from t tablesample system (10) repeatable(-10)",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

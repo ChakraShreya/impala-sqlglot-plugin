@@ -1,0 +1,47 @@
+{
+  "source": "ParserTest.TestHaving",
+  "phase": 2,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select a, b, count(c) from test group by a, b having count(*) > 5",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, count(c) from test group by a, b having NULL",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, count(c) from test group by a, b having true",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, count(c) from test group by a, b having false",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select count(c) from test group by a having if (a > b, true, false)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, count(c) from test group by a, b having 5",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, count(c) from test group by a, b having order by 5",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select a, b, count(c) from test having count(*) > 5 group by a, b",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "source": "ParserTest.TestGroupingKeyword",
+  "phase": 2,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "SELECT a, grouping(a) FROM foo GROUP BY GROUPING SETS((a, b))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, gRoUpInG(a) FROM foo GROUP BY GROUPING SETS((a, b))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SELECT a, `grouping`(a) FROM foo GROUP BY GROUPING SETS((a, b))",
+      "expect": "ok",
+      "dynamic": false
+    }
+  ]
+}

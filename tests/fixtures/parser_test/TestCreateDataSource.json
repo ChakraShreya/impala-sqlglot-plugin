@@ -1,0 +1,32 @@
+{
+  "source": "ParserTest.TestCreateDataSource",
+  "phase": 4,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "CREATE DATA SOURCE foo CLASS 'com.bar.Foo' API_VERSION 'V1'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE DATA SOURCE foo LOCATION '/foo.jar' API_VERSION 'V1'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE DATA SOURCE foo LOCATION '/foo.jar' CLASS API_VERSION 'V1'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE DATA SOURCE foo LOCATION '/foo.jar' CLASS 'com.bar.Foo'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE DATA SOURCE foo LOCATION '/foo.jar' CLASS 'Foo' API_VERSION",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "source": "ParserTest.TestSet",
+  "phase": 5,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "SET foo='bar'",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SET foo=\"bar\"",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SET foo=bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SET foo = bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SET foo=1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SET foo=true",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SET foo=false",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SET foo=1.2",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SET foo=null",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SET foo=10g",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SET `foo`=0",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SET foo=''",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SET",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "SET foo",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SET foo=",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SET foo=1+2",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "SET foo = '10",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "source": "ParserTest.TestCreateDropRole",
+  "phase": 4,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "CREATE ROLE foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP ROLE foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP ROLE foo",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE ROLE `role`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP ROLE  `role`",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE ROLE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP ROLE",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "CREATE ROLE 'foo'",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "DROP ROLE 'foo'",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

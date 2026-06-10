@@ -1,0 +1,107 @@
+{
+  "source": "ParserTest.TestIdentifier",
+  "phase": 0,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "select * from foo.bar_123",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from foo. bar_123",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from foo .bar_123",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from foo . bar_123",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from foo.123_bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from foo. 123_bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from foo .123_bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from foo . 123_bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from 123_foo.bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from 123_foo. bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from 123_foo .bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from 123_foo . bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from 123_foo.123_bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from 123_foo. 123_bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from 123_foo .123_bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from 123_foo . 123_bar",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from foo.4e1",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from 4e1.bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from .123_bar",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from . 123_bar",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}

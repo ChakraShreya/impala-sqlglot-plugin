@@ -1,0 +1,147 @@
+{
+  "source": "ParserTest.TestValuesStmt",
+  "phase": 2,
+  "has_dynamic": false,
+  "cases": [
+    {
+      "sql": "values(1, 'a', abc, 1.0, *)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from (values(1, 'a', abc, 1.0, *)) as t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "values(1, 'a', abc, 1.0, *) union all values(1, 'a', abc, 1.0, *)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "insert into t values(1, 'a', abc, 1.0, *)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "upsert into t values(1, 'a', abc, 1.0, *)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "values(1, abc), ('x', cde), (2), (efg, fgh, ghi)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from (values(1, abc), ('x', cde), (2), (efg, fgh, ghi)) as t",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "insert into t values(1, abc), ('x', cde), (2), (efg, fgh, ghi)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "upsert into t values(1, abc), ('x', cde), (2), (efg, fgh, ghi)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "(values(1, abc), ('x', cde), (2), (efg, fgh, ghi))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "values((1, abc), ('x', cde), (2), (efg, fgh, ghi))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "(values((1, abc), ('x', cde), (2), (efg, fgh, ghi)))",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "values(1 as x, 2 as y, 3 as z)",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "values(1, 'a') limit 10",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "values(1, 'a') order by 1",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "values(1, 'a') order by 1 limit 10",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "values(1, 'a') order by 1 offset 10",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "values(1, 'a') offset 10",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "values(1, 'a'), (2, 'b') order by 1 limit 10",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "values((1, 'a'), (2, 'b')) order by 1 limit 10",
+      "expect": "ok",
+      "dynamic": false
+    },
+    {
+      "sql": "values()",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "values 1, 'a', abc, 1.0",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "values(1, 'a') values(1, 'a')",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select values(1, 'a')",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "select * from values(1, 'a', abc, 1.0) as t",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "values((1, 2, 3), values(1, 2, 3))",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "values((1, 'a'), (1, 'a') order by 1)",
+      "expect": "error",
+      "dynamic": false
+    },
+    {
+      "sql": "values((1, 'a'), (1, 'a') limit 10)",
+      "expect": "error",
+      "dynamic": false
+    }
+  ]
+}
