@@ -32,6 +32,8 @@ _IMPALA_KEYWORDS: dict[str, TokenType] = {
     # the base _parse_version() method can be overridden cleanly.
     "FOR SYSTEM_TIME AS OF": TokenType.TIMESTAMP_SNAPSHOT,
     "FOR SYSTEM_VERSION AS OF": TokenType.VERSION_SNAPSHOT,
+    # UPSERT has the same grammar as INSERT in Impala
+    "UPSERT": TokenType.INSERT,
 }
 
 

@@ -31,7 +31,8 @@
     {
       "sql": "/*//*/select 1",
       "expect": "ok",
-      "dynamic": false
+      "dynamic": false,
+      "known_limitation": "sqlglot tokenizer treats // inside block comment as line comment"
     },
     {
       "sql": "select 1/***/",

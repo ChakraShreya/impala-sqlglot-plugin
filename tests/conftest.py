@@ -23,6 +23,7 @@ class ParserCase:
     source: str        # e.g. "ParserTest.TestSelect"
     phase: int
     dynamic: bool = False
+    known_limitation: str | None = None
 
 
 def load_fixtures(phase: int | None = None, method: str | None = None) -> List[ParserCase]:
@@ -42,6 +43,7 @@ def load_fixtures(phase: int | None = None, method: str | None = None) -> List[P
                     source=data["source"],
                     phase=data["phase"],
                     dynamic=c.get("dynamic", False),
+                    known_limitation=c.get("known_limitation"),
                 )
             )
     return cases

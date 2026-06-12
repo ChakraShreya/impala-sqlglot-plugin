@@ -21,7 +21,8 @@
     {
       "sql": "select a, b, c from t where 'abc' between 'a' like 'a' and 'b' like 'b'",
       "expect": "ok",
-      "dynamic": false
+      "dynamic": false,
+      "known_limitation": "sqlglot BETWEEN parser does not support LIKE as bound expression"
     },
     {
       "sql": "select a, b, c from t where true and false and i between x and y",

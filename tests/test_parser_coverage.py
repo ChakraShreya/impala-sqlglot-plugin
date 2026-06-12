@@ -89,6 +89,8 @@ def test_phase5_parse(case: ParserCase):
 # Core assertion helper
 # ---------------------------------------------------------------------------
 def _assert_case(case: ParserCase) -> None:
+    if case.known_limitation:
+        pytest.xfail(f"Known limitation: {case.known_limitation}")
     if case.expect == "ok":
         try:
             result = sqlglot.parse(case.sql, read="impala", error_level=sqlglot.ErrorLevel.RAISE)

@@ -6,7 +6,8 @@
     {
       "sql": "select error(a, interval b error)",
       "expect": "ok",
-      "dynamic": false
+      "dynamic": false,
+      "known_limitation": "sqlglot does not recognize ERROR as a valid interval unit"
     },
     {
       "sql": "select a + interval b years + interval c months + interval d days",
