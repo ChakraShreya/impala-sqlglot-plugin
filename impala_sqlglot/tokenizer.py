@@ -34,6 +34,13 @@ _IMPALA_KEYWORDS: dict[str, TokenType] = {
     "FOR SYSTEM_VERSION AS OF": TokenType.VERSION_SNAPSHOT,
     # UPSERT has the same grammar as INSERT in Impala
     "UPSERT": TokenType.INSERT,
+    # Kudu NON UNIQUE PRIMARY KEY is treated as PRIMARY KEY
+    "NON UNIQUE PRIMARY KEY": TokenType.PRIMARY_KEY,
+    # Impala admin statements parsed as commands
+    "INVALIDATE METADATA": TokenType.COMMAND,
+    "COMPUTE STATS": TokenType.COMMAND,
+    "COMPUTE INCREMENTAL STATS": TokenType.COMMAND,
+    "COPY TESTCASE": TokenType.COMMAND,
 }
 
 

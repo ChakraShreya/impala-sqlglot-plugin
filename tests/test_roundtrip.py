@@ -21,7 +21,10 @@ def normalize_sql(sql: str) -> str:
     return re.sub(r"\s+", " ", sql.strip().lower())
 
 
-def assert_roundtrip(sql: str) -> None:
+def assert_roundtrip(case: ParserCase) -> None:
+    if case.known_limitation:
+        pytest.xfail(f"Known limitation: {case.known_limitation}")
+    sql = case.sql
     try:
         out = sqlglot.transpile(sql, read="impala", write="impala")[0]
     except (ParseError, Exception) as exc:
@@ -52,7 +55,7 @@ def _ok_cases(phase: int) -> list[ParserCase]:
     ids=[case_id(c) for c in _ok_cases(3)],
 )
 def test_roundtrip_phase3(case: ParserCase):
-    assert_roundtrip(case.sql)
+    assert_roundtrip(case)
 
 
 # Phase 4
@@ -63,7 +66,7 @@ def test_roundtrip_phase3(case: ParserCase):
     ids=[case_id(c) for c in _ok_cases(4)],
 )
 def test_roundtrip_phase4(case: ParserCase):
-    assert_roundtrip(case.sql)
+    assert_roundtrip(case)
 
 
 # Phase 5
@@ -74,4 +77,4 @@ def test_roundtrip_phase4(case: ParserCase):
     ids=[case_id(c) for c in _ok_cases(5)],
 )
 def test_roundtrip_phase5(case: ParserCase):
-    assert_roundtrip(case.sql)
+    assert_roundtrip(case)

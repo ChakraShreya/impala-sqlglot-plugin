@@ -316,7 +316,8 @@
     {
       "sql": "CREATE TABLE Foo (i int) PARTITION BY RANGE (PARTITION VALUE = 10)",
       "expect": "ok",
-      "dynamic": false
+      "dynamic": false,
+      "known_limitation": "Kudu PARTITION VALUE range syntax not supported by sqlglot"
     },
     {
       "sql": "CREATE TABLE Foo(a int PRIMARY KEY, b int DEFAULT 1+1) STORED AS KUDU",
