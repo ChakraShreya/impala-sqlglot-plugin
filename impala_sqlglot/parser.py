@@ -55,6 +55,19 @@ class ImpalaParser(Hive.Parser):
             exp.Version(this=kind, expression=expression, kind="AS OF")
         )
 
+    def _parse_unary(self) -> exp.Expression | None:
+        this = super()._parse_unary()
+        # The tokenizer uses NOT for both prefix negation and postfix factorial.
+        while (
+            this is not None
+            and self._curr
+            and self._curr.token_type == TokenType.NOT
+            and self._curr.text == "!"
+        ):
+            self._advance()
+            this = self.expression(exp.Factorial(this=this))
+        return this
+
     def _parse_partition_and_order(
         self,
     ) -> tuple[list[exp.Expression], t.Optional[exp.Expression]]:
