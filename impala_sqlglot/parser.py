@@ -6,9 +6,14 @@ import typing as t
 from sqlglot import exp
 from sqlglot.dialects.hive import Hive
 from sqlglot.tokens import TokenType
+from impala_sqlglot.syntax import ImpalaSyntaxParserMixin
+from impala_sqlglot.metadata import ImpalaMetadataParserMixin
+from impala_sqlglot.ddl import ImpalaDDLParserMixin
 
 
-class ImpalaParser(Hive.Parser):
+class ImpalaParser(
+    ImpalaMetadataParserMixin, ImpalaDDLParserMixin, ImpalaSyntaxParserMixin, Hive.Parser,
+):
     """Impala SQL parser.
 
     Phase 0 changes:
@@ -32,11 +37,26 @@ class ImpalaParser(Hive.Parser):
         **Hive.Parser.CONSTRAINT_PARSERS,
         "NON UNIQUE PRIMARY KEY": lambda self: self._parse_primary_key(),
     }
+    SCHEMA_UNNAMED_CONSTRAINTS = {
+        *Hive.Parser.SCHEMA_UNNAMED_CONSTRAINTS, "NON UNIQUE PRIMARY KEY",
+    }
+    PROPERTY_PARSERS = {
+        **Hive.Parser.PROPERTY_PARSERS,
+        "NON UNIQUE PRIMARY KEY": lambda self: self._parse_primary_key(in_props=True),
+    }
+    # TABLESAMPLE belongs to its table even when an alias precedes it.
+    TABLE_TERMINATORS = Hive.Parser.TABLE_TERMINATORS - {TokenType.TABLE_SAMPLE}
+    TABLE_POSTFIX_TOKENS = Hive.Parser.TABLE_POSTFIX_TOKENS | {TokenType.TABLE_SAMPLE}
 
     STATEMENT_PARSERS = {
         **Hive.Parser.STATEMENT_PARSERS,
         TokenType.COLON: lambda self: self._parse_impala_admin_fn(),
-        TokenType.REFRESH: lambda self: self._parse_impala_refresh(),
+    }
+
+    OPERATION_MODIFIERS = {*Hive.Parser.OPERATION_MODIFIERS, "STRAIGHT_JOIN"}
+    QUERY_MODIFIER_PARSERS = {
+        token: parser for token, parser in Hive.Parser.QUERY_MODIFIER_PARSERS.items()
+        if token.name not in ("DISTRIBUTE_BY", "CLUSTER_BY", "SORT_BY")
     }
 
     def _parse_version(self) -> exp.Version | None:
@@ -50,6 +70,10 @@ class ImpalaParser(Hive.Parser):
         expression = self._parse_bitwise()
         if expression is None:
             self.raise_error("Expected time-travel value after AS OF")
+        if kind == "VERSION":
+            value = expression.this if isinstance(expression, exp.Neg) else expression
+            if not isinstance(value, exp.Literal) or value.is_string:
+                self.raise_error("SYSTEM_VERSION AS OF requires a numeric literal")
 
         return self.expression(
             exp.Version(this=kind, expression=expression, kind="AS OF")
@@ -84,15 +108,6 @@ class ImpalaParser(Hive.Parser):
             self._advance()
         text = self._find_sql(start, self._prev)
         return exp.Command(this=text[:1], expression=text[1:])
-
-    def _parse_impala_refresh(self) -> exp.Refresh | exp.Command:
-        """Override REFRESH to handle PARTITION clause and FUNCTIONS (Impala-specific)."""
-        start = self._prev
-        while self._curr:
-            self._advance()
-        text = self._find_sql(start, self._prev)
-        return exp.Command(this="REFRESH", expression=text[len("REFRESH"):])
-
 
     def _parse_comment(self, allow_exists: bool = True) -> exp.Expression:
         """Override to support COMMENT ON ... IS NULL (clearing a comment)."""
