@@ -26,12 +26,6 @@ _HIVE_ONLY_KEYWORDS: frozenset[str] = frozenset(
 
 # Additional multi-word keyword phrases to ADD for Impala
 _IMPALA_KEYWORDS: dict[str, TokenType] = {
-    # Impala time-travel (FOR SYSTEM_TIME AS OF / FOR SYSTEM_VERSION AS OF)
-    # These are parsed as multi-token sequences in the Parser layer; we map
-    # the leading phrase to a TIMESTAMP_SNAPSHOT / VERSION_SNAPSHOT token so
-    # the base _parse_version() method can be overridden cleanly.
-    "FOR SYSTEM_TIME AS OF": TokenType.TIMESTAMP_SNAPSHOT,
-    "FOR SYSTEM_VERSION AS OF": TokenType.VERSION_SNAPSHOT,
     # UPSERT has the same grammar as INSERT in Impala
     "UPSERT": TokenType.INSERT,
     # Kudu NON UNIQUE PRIMARY KEY is treated as PRIMARY KEY
