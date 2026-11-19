@@ -39,6 +39,22 @@ class ImpalaParser(Hive.Parser):
         TokenType.REFRESH: lambda self: self._parse_impala_refresh(),
     }
 
+    def _parse_version(self) -> exp.Version | None:
+        if self._match_text_seq("FOR", "SYSTEM_TIME", "AS", "OF"):
+            kind = "TIMESTAMP"
+        elif self._match_text_seq("FOR", "SYSTEM_VERSION", "AS", "OF"):
+            kind = "VERSION"
+        else:
+            return super()._parse_version()
+
+        expression = self._parse_bitwise()
+        if expression is None:
+            self.raise_error("Expected time-travel value after AS OF")
+
+        return self.expression(
+            exp.Version(this=kind, expression=expression, kind="AS OF")
+        )
+
     def _parse_partition_and_order(
         self,
     ) -> tuple[list[exp.Expression], t.Optional[exp.Expression]]:
