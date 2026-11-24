@@ -1,0 +1,192 @@
+# Impala-specific syntax and analysis
+
+The dialect preserves the following constructs as structured expressions
+and regenerates Impala SQL:
+
+| Construct | Expression / fields |
+| --- | --- |
+| UPSERT | `impala_sqlglot.syntax.Upsert`, a distinct subclass of `exp.Insert`, with target, source, columns and hint |
+| Plan hints | `exp.Hint` on a SELECT, write, JOIN, table or inline view; `PlanHintProperty` for CREATE TABLE AS SELECT. Inputs generate comment hints except for bracketed JOIN distribution hints, which retain brackets in Impala SQL. |
+| Hinted inline views | `ImpalaSubquery`, a subclass of `exp.Subquery` with `hints` |
+| SELECT STRAIGHT_JOIN | `Select.operation_modifiers`; comment-form STRAIGHT_JOIN remains a hint |
+| Time travel | `exp.Version`, generated as `FOR SYSTEM_TIME AS OF` or `FOR SYSTEM_VERSION AS OF` |
+| TABLESAMPLE | `exp.TableSample` with `method=SYSTEM`, `percent` and optional `seed`, generated with `REPEATABLE` |
+| Non-unique primary keys | `NonUniquePrimaryKey` or `NonUniquePrimaryKeyColumnConstraint`, with `unique=False` |
+| Table-key modifiers | `ImpalaPrimaryKey` / `ImpalaForeignKey`, with optional `enabled`, `validated` and `rely` boolean fields; non-unique table keys retain the same fields |
+| Catalog SHOW | `impala_sqlglot.show.ImpalaShow`, with `kind`, optional target `this`, database identifier `db`, pattern, partition predicate, time travel and family-specific options |
+| Statistics | `ImpalaComputeStats` / `ImpalaDropStats`, with a table target and applicable incremental, partition, column-list and sampling options |
+| Metadata | `ImpalaRefresh` / `ImpalaInvalidateMetadata`; refresh distinguishes tables, functions and authorization |
+| Kudu partitioning | `KuduPartitioningProperty`, ordered hash/range components, hash columns/counts, range endpoints and inclusivity |
+| ADD / DROP RANGE PARTITION | `KuduAlterRangePartition` actions inside `exp.Alter` |
+| Partition maintenance | `ImpalaRecoverPartitions` / `ImpalaDropPartition` actions inside `exp.Alter`; DROP retains predicate selection, IF EXISTS and PURGE |
+| Cache maintenance | `ImpalaSetCached` / `ImpalaSetUncached` actions inside `exp.Alter`, with optional partition selection; CACHED retains its pool and replication literal |
+| LIKE PARQUET | `ParquetSchemaReference` holding a string reference, not a resolved schema |
+| Function signatures | `VariadicParameter` around the final type; scalar CREATE and DROP signatures are checked separately |
+| DROP FUNCTION | `DropFunction`; `wrapped` distinguishes omitted signatures from `()` |
+
+Syntax expression extensions are in `impala_sqlglot.syntax`, metadata
+extensions in `impala_sqlglot.metadata`, and Kudu/schema extensions in
+`impala_sqlglot.ddl`. Ordinary primary keys keep SQLGlot's existing types.
+Targets remain ordinary `exp.Table` nodes where the syntax identifies a table.
+
+For example:
+
+```python
+import sqlglot
+import impala_sqlglot
+from impala_sqlglot.syntax import Upsert
+
+tree = sqlglot.parse_one(
+    "UPSERT [SHUFFLE] INTO demo_output SELECT demo_key FROM demo_input",
+    read="impala",
+)
+assert isinstance(tree, Upsert)
+assert tree.this.name == "demo_output"
+assert tree.sql(dialect="impala").startswith("UPSERT /*+ SHUFFLE */ INTO")
+```
+
+## Validation boundaries
+
+- Table-level primary and foreign keys retain ENABLE/DISABLE,
+  VALIDATE/NOVALIDATE and RELY/NORELY in that order. Each omitted flag stays
+  absent (`None` when read with `args.get`), rather than becoming an explicit
+  declaration. Repeated and out-of-order flags are rejected. NOT ENFORCED
+  remains a separate option. These fields describe declarations, not proof
+  that the engine enforces uniqueness or referential integrity. Native
+  modifier combinations have not been qualified by live semantic analysis.
+  Modifiers are not accepted for CREATE TABLE AS SELECT. NON UNIQUE and
+  NOT ENFORCED are alternative spellings, not combinable declarations.
+  Key column lists require identifiers; foreign keys require complete
+  referenced table and column lists. These table-key flags are not column
+  nullability modifiers: `NOT NULL DISABLE NOVALIDATE RELY` and
+  `NOT NULL ENABLE NOVALIDATE RELY` are not native column definitions.
+  Explicit column NULL and NOT NULL declarations remain in generated SQL.
+- Structured SHOW covers TABLES, DATABASES/SCHEMAS, TABLE/COLUMN STATS,
+  PARTITIONS (optional WHERE), RANGE PARTITIONS, HASH SCHEMA, FUNCTIONS
+  (optional AGGREGATE/ANALYTIC), CREATE TABLE/VIEW (optional WITH STATS),
+  and FILES IN a table (optional time travel followed by PARTITION).
+  TABLES and FUNCTIONS accept IN a database; catalog listings accept string
+  patterns. Bare patterns generate with LIKE; SCHEMAS generates as DATABASES.
+  SCALAR FUNCTIONS is not native syntax. Other SHOW families remain opaque
+  Commands. Parsing does not query a catalog or fabricate returned objects.
+- ALTER TABLE RECOVER PARTITIONS, DROP [IF EXISTS] PARTITION with optional
+  PURGE, and SET CACHED/UNCACHED retain separate action types.
+  Cache actions can select partitions; DROP selection can contain predicates,
+  not only static assignments. DROP remains a destructive action, distinct
+  from catalog inspection and recovery. Parsing never executes any action.
+  Replication accepts an unsigned decimal integer literal; usable replication
+  values, cache pools and partition selections require engine analysis.
+- Statistics/metadata paths require the documented targets and reject
+  unsupported option combinations. Targetless `INVALIDATE METADATA` is valid.
+  `COMPUTE STATS ... ()` preserves an explicitly empty column list.
+- Only incremental statistics accept `PARTITION`; incremental computation
+  does not accept sampling. Incremental DROP requires a partition.
+- Query/statistics sample percentages must be integers from 0 to 100.
+  Seeds from 0 to 2^63-1 are the plugin's conservative integer policy, not an
+  independently established engine limit. The public documentation says
+  positive seeds; the pinned grammar accepts unsigned integer literals.
+  Table aliases precede TABLESAMPLE; table hints follow sampling.
+- An explicit write column permutation permits the native source-less form.
+  Empty `()` is retained. Hints may be leading or trailing, not both.
+  Empty plan hints are a no-op; ordinary multiline comments do not activate
+  hints merely because a later line begins with `+`.
+  Multiline block comments are not active plan hints, including those whose
+  first line begins with `+`.
+- Directly after `JOIN`, a single unquoted `BROADCAST` or `SHUFFLE` in
+  brackets is stored as `ImpalaJoinBracketHint` (an `exp.Hint`) on the join's
+  `hint` argument. Its source span includes both brackets. Impala output uses
+  uppercase inside the brackets; the hint is not translated to other dialects.
+- `SYSTEM_VERSION` accepts numeric literals, not column references or
+  arithmetic expressions. Acceptance by the parser does not establish that
+  a snapshot exists.
+- Hive `DISTRIBUTE BY`, `CLUSTER BY` and `SORT BY` query clauses are rejected.
+  Ordinary ORDER BY and window PARTITION BY remain supported.
+- Unsupported UNIQUE constraints are rejected by generation, not silently
+  removed by Hive preprocessing. Unsupported write/sampling options are
+  rejected rather than dropped or converted into a different operation.
+- A schema-file reference is never opened or fetched. The dialect does not
+  invent external columns, resolve primary keys or existing ranges, or
+  validate data against a live catalog.
+- Aggregate CREATE FUNCTION and unrelated legacy statements may still fall
+  back to `exp.Command`. A Command preserves text; it is not detailed grammar
+  validation or structured lineage.
+- Generic SQLGlot optimizers, other dialect generators and lineage consumers
+  are not automatically aware of these extension classes. Consumers must
+  retain their fields or explicitly reject unsupported transformations.
+  Use `tree.sql(dialect="impala")` for generation. Even a RELY-only table key
+  now uses an Impala extension node; `.sql()` without a dialect and Hive
+  generation do not support that node and raise rather than drop its fields.
+
+## Statistics consumer integration
+
+The `partition` field of `ImpalaComputeStats` and `ImpalaDropStats` is an
+`exp.Partition` node, or `None` when absent. Read the predicate list through
+`partition.expressions`, not by iterating the node as a provider-specific
+list. Incremental statistics predicates can contain comparisons, conjunctions
+and other expressions; they are not necessarily static key/value assignments.
+
+```python
+partition = tree.args.get("partition")
+predicates = [] if partition is None else partition.expressions
+predicate_sql = [item.sql(dialect="impala") for item in predicates]
+```
+
+Consumers that use a different provider must adapt its imports, node types
+and lowering logic separately. The plugin does not replace those adapters
+or treat a statistics operation as a row-data write. Ordinary COMPUTE STATS
+with PARTITION is not added by this integration contract.
+
+`ImpalaShow` describes metadata inspection, not a SELECT result or a row-data
+write. Its `this` target is absent for catalog listings and an `exp.Table`
+for table-specific families. A consumer should classify its `kind` explicitly
+and retain optional `partition`, `where`, `version`, `function_kind` and
+`with_stats` fields rather than silently dropping them.
+
+The plugin accepts SQL statements, not arbitrary source-file wrappers,
+unbound template parameters or client scripts. Consumers must frame strings
+with the selected dialect's escape rules and supply a documented source and
+binding contract. Dropping angle-bracket markers or guessing parameter
+values is not a parser repair.
+
+## Reference and compatibility limits
+
+Syntax expectations are based on Apache's public SQL reference and native
+grammar blob `5424488331aba80f43853409c4d56eada20beb86`, with parser-test blob
+`d6addf016e37cfb90d540b5eb7013f578e18e359`. The identifier checks in metadata
+also consult public scanner blob `9e461a4d5416e7e0975c9378800a5e18bd0d66c1`;
+its exact association with the grammar revision has not been established.
+This is a pinned source reference, not a declared Impala release range.
+In particular, NON UNIQUE PRIMARY KEY requires an engine supporting that
+grammar. No server execution, engine-release, optimizer or performance
+qualification has been performed.
+
+SQLGlot 30.10.0 and 30.33.0 were checked locally using Python 3.13.16.
+The project targets Python 3.11 and 3.12, but those interpreters were not
+available for local qualification. The open-ended dependency requirement is
+not a guarantee that every future SQLGlot version is compatible.
+
+New regression SQL and implementation code use only public references and
+independently authored synthetic examples.
+
+## Running the regression tests
+
+With the package and pytest installed in the chosen environment:
+
+```bash
+python -m pytest tests/test_impala_gaps.py tests/test_metadata.py \
+  tests/test_kudu_ddl.py tests/test_generation_controls.py \
+  tests/test_roundtrip_helper.py tests/test_fixture_controls.py \
+  tests/test_show.py tests/test_maintenance.py tests/test_native_column_controls.py \
+  tests/test_metadata_keyword_controls.py
+python -m pytest
+```
+
+The round-trip helper requires structural equality and correct hint
+attachment; it does not swallow parser/generator failures. Expected lexical
+and syntax rejections accept `TokenError` / `ParseError`, not arbitrary
+runtime crashes. Some older extracted negative fixtures remain expected
+failures because syntax and catalog/type analysis are not the same check.
+Use SQLGlot's default immediate errors or `ErrorLevel.RAISE` for validation;
+`IGNORE` and `WARN` may return partial trees and are not validation modes.
+The generated `tests/coverage_matrix.yaml` is historical extraction metadata,
+not a current proof of implemented syntax.
